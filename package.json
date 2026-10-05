@@ -16,6 +16,7 @@
     "test": "npm run test --workspace=school-ops-frontend"
   },
   "optionalDependencies": {
+    "@tailwindcss/oxide-linux-x64-gnu": "^4.3.3",
     "lightningcss-linux-x64-gnu": "^1.32.0",
     "lightningcss-linux-x64-musl": "^1.32.0"
   }
