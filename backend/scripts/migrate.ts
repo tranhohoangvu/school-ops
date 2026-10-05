@@ -15,9 +15,10 @@ async function runMigrations() {
   }
 
   const isProduction = process.env.NODE_ENV === 'production';
+  const requiresSsl = isProduction || databaseUrl.includes('render.com') || databaseUrl.includes('neon.tech') || databaseUrl.includes('supabase.co');
   const pool = new Pool({
     connectionString: databaseUrl,
-    ssl: isProduction || databaseUrl.includes('render.com') ? { rejectUnauthorized: false } : undefined,
+    ssl: requiresSsl ? { rejectUnauthorized: false } : undefined,
   });
 
   const client = await pool.connect();

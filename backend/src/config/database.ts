@@ -4,7 +4,7 @@ import { ENV } from './env.js';
 const { Pool } = pg;
 
 const isProduction = ENV.NODE_ENV === 'production';
-const requiresSsl = isProduction || ENV.DATABASE_URL.includes('render.com');
+const requiresSsl = isProduction || ENV.DATABASE_URL.includes('render.com') || ENV.DATABASE_URL.includes('neon.tech') || ENV.DATABASE_URL.includes('supabase.co');
 
 export const pool = new Pool({
   connectionString: ENV.DATABASE_URL,
