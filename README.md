@@ -7,7 +7,8 @@
 [![Next.js 16](https://img.shields.io/badge/Frontend-Next.js%2016%20(App%20Router)-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
 [![React 19](https://img.shields.io/badge/React-19-blue?style=for-the-badge&logo=react)](https://react.dev/)
 [![Express](https://img.shields.io/badge/Backend-Node.js%20%2B%20Express-lightgrey?style=for-the-badge&logo=express)](https://expressjs.com/)
-[![PostgreSQL](https://img.shields.io/badge/Database-PostgreSQL%2016-336791?style=for-the-badge&logo=postgresql)](https://www.postgresql.org/)
+[![PostgreSQL](https://img.shields.io/badge/Database-PostgreSQL%2016%20(Neon)-336791?style=for-the-badge&logo=postgresql)](https://neon.tech/)
+[![Vercel](https://img.shields.io/badge/Deploy-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/)
 [![TypeScript](https://img.shields.io/badge/Language-TypeScript%205-blue?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
 [![TailwindCSS v4](https://img.shields.io/badge/Styling-TailwindCSS%20v4-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
 [![Tests](https://img.shields.io/badge/Tests-110%2F110%20Passed-brightgreen?style=for-the-badge&logo=vitest)](https://vitest.dev/)
@@ -111,7 +112,7 @@ school-ops/
 │                     PostgreSQL Database                     │
 │  - 12 Relational Tables with constraints, triggers, indexes │
 │  - Migrations: backend/migrations/ (001 -> 007)             │
-│  - Deployment Targets: Native PostgreSQL / Render Postgres  │
+│  - Deployment Targets: Vercel / Neon Serverless Postgres    │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -156,7 +157,7 @@ Permissions adapt automatically based on the teacher's active assignment in each
 
 ### 1. Prerequisites
 * Node.js >= 20
-* PostgreSQL 16 (Local instance or Cloud database such as Render PostgreSQL)
+* PostgreSQL 16 (Local instance or Cloud database such as Neon Serverless PostgreSQL)
 
 ### 2. Install Workspace Dependencies (from root `school-ops/`)
 ```bash

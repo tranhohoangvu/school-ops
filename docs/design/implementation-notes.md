@@ -1,6 +1,6 @@
 # Implementation Notes, Technical Debt & Migration Roadmap
 
-This document outlines technical architecture decisions, historical documentation discrepancies, and the migration architecture to Node.js, Express, and PostgreSQL deployed on Render.
+This document outlines technical architecture decisions, historical documentation discrepancies, and the migration architecture to Node.js, Express, and PostgreSQL deployed on Vercel and Neon.
 
 ---
 
@@ -20,7 +20,7 @@ During the codebase audit, certain discrepancies between early documentation and
  
 ### 2.1. Dual-Persistence & REST API Integration
 * **Implementation:** The client application provides both offline-ready fallback (`LocalStore`) and a full REST API client (`frontend/src/lib/api-client.ts`) connecting to the standalone Express backend.
-* **Impact:** In development/standalone mode, the app functions offline; when connected to the backend, mutations persist to native PostgreSQL on Render with multi-device synchronization.
+* **Impact:** In development/standalone mode, the app functions offline; when connected to the backend, mutations persist to native PostgreSQL on Neon Serverless with multi-device synchronization.
 
 ### 2.2. Production Authentication & Security Hardening
 * **Implementation:** Passwords in PostgreSQL are hashed with `bcryptjs` (10 rounds). The Express backend validates credentials, issues signed JWTs in `httpOnly`, `sameSite: 'lax'` cookies, and extracts claims via `auth.middleware.ts`.
@@ -31,13 +31,13 @@ During the codebase audit, certain discrepancies between early documentation and
 
 ---
 
-## 3. Completed Backend Architecture & Render Deployment
+## 3. Completed Backend Architecture, Vercel & Neon Deployment
 
-The backend has been migrated from Supabase to a self-managed Node.js + Express + PostgreSQL architecture ready for deployment to Render:
+The backend has been migrated from Supabase to a self-managed Node.js + Express + PostgreSQL architecture deployed to Vercel and Neon:
 
 1. **Backend Service (`backend/`):**
-   - Express 5 + TypeScript layered architecture (`controllers/`, `services/`, `repositories/`, `middleware/`, `validators/`, `config/`).
-   - Connection pool via `pg.Pool` with SSL rejection handling for Render PostgreSQL.
+   - Express layered architecture (`controllers/`, `services/`, `repositories/`, `middleware/`, `validators/`, `config/`).
+   - Connection pool via `pg.Pool` with SSL rejection handling for Neon PostgreSQL (`neon.tech`).
    - Centralized error handling (`AppError` -> `{ error: { code, message, details } }`).
    - Zod schema validation for all endpoints.
 
@@ -47,6 +47,7 @@ The backend has been migrated from Supabase to a self-managed Node.js + Express 
    - `003_indexes.sql`: Foreign key and query optimization indexes.
    - `004_functions.sql` & `005_triggers.sql`: PostgreSQL triggers for capacity and grade limits.
    - `006_seed.sql`: Pre-hashed bcrypt credentials and full school master data.
+   - `007_timetable_rules.sql`: Max consecutive periods per subject and timetable room conflict index.
    - Migration runner: `npm run migrate` in `backend/`.
 
 3. **Frontend Integration:**
@@ -54,6 +55,7 @@ The backend has been migrated from Supabase to a self-managed Node.js + Express 
    - Next.js rewrites in `next.config.ts` proxying `/api/:path*` and `/health` to `http://localhost:4000` (or `BACKEND_URL`).
    - Next.js 16 proxy in `frontend/src/proxy.ts` verifying session cookies without any third-party SDK dependencies.
 
-4. **Render Deployment:**
-   - Database: Render PostgreSQL instance with standard `DATABASE_URL`.
-   - Web Service: Node.js environment running `npm run build && npm start` in `backend/` with health check at `/health`.
+4. **Vercel & Neon Deployment:**
+   - Database: Neon Serverless PostgreSQL instance with pooled connection `DATABASE_URL` (`-pooler`).
+   - Backend: Vercel Serverless Function via `backend/vercel.json` and `backend/api/index.js` running Express.
+   - Frontend: Vercel deployment with `@tailwindcss/oxide` native dependencies preinstalled via `frontend/vercel.json`.

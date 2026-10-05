@@ -2,7 +2,7 @@
 
 ## 1. Relational PostgreSQL Database
 
-The application database is a native **PostgreSQL 16** instance deployed on Render PostgreSQL (or local PostgreSQL during development), managed by versioned SQL migration scripts located in `backend/migrations/`.
+The application database is a native **PostgreSQL 16** instance deployed on Neon Serverless PostgreSQL (or local PostgreSQL during development), managed by versioned SQL migration scripts located in `backend/migrations/`.
 
 Connection pooling is handled via the `pg` package (`pg.Pool`), enforcing parameterized queries to eliminate SQL injection risks.
 
@@ -135,3 +135,4 @@ Standardized 4×5 classroom grid (20 double desks = 40 seats).
 4. `004_functions.sql`: `update_updated_at()`, `check_max_students()`.
 5. `005_triggers.sql`: Auto-timestamps and maximum student capacity enforcement.
 6. `006_seed.sql`: Complete THCS seed dataset with hashed passwords for test personas.
+7. `007_timetable_rules.sql`: Subject max consecutive periods and room conflict exclusion index.

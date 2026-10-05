@@ -2,10 +2,10 @@
 
 ## 1. Overview & Base URL
 
-The **SchoolOps REST API** is an Express + TypeScript service deployed on Render Web Service and proxied locally through Next.js at `/api/*`.
+The **SchoolOps REST API** is an Express + TypeScript service deployed on Vercel Serverless Functions (via `api/index.js`) and proxied locally or in production through Next.js at `/api/*`.
 
 * **Local Base URL**: `http://localhost:4000/api`
-* **Production Base URL**: `https://<render-service-url>/api`
+* **Production Base URL**: `https://<vercel-backend-url>/api` (or proxied via frontend domain)
 * **Health Check**: `GET /health`
 * **Response Format**: Standard JSON `{ data: ... }` for success and `{ error: { code, message } }` for errors.
 * **Authentication**: Credentials via HTTP-only cookie `token` or header `Authorization: Bearer <token>`.

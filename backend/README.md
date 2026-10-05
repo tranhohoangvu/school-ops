@@ -9,7 +9,7 @@ A dedicated REST API service for the SchoolOps platform, built on **Node.js**, *
 * **Runtime:** Node.js (>= 20)
 * **Framework:** Express 4.21
 * **Language:** TypeScript 5.8
-* **Database:** PostgreSQL 16 (Native PostgreSQL or Render PostgreSQL)
+* **Database:** PostgreSQL 16 (Native PostgreSQL or Neon Serverless PostgreSQL)
 * **Database Client:** `pg` (node-postgres connection pool)
 * **Security & Auth:** `bcryptjs` (password hashing), `jsonwebtoken` (signed JWT tokens & HttpOnly cookies)
 * **Request Validation:** Zod 3.24 (runtime validation on request parameters, query strings, and body payloads)
@@ -150,6 +150,28 @@ Health check endpoint: **`http://localhost:4000/health`**
 npm run build
 npm run start
 ```
+
+---
+
+## ☁️ Deployment (Vercel & Neon)
+
+### 1. Database Provisioning on Neon
+1. Create a project and PostgreSQL database on [Neon](https://neon.tech/).
+2. Obtain your pooled connection string (`postgresql://...ep-xyz-pooler.region.neon.tech/neondb?sslmode=require`).
+3. Run migrations against your Neon database:
+   ```bash
+   DATABASE_URL="postgresql://user:pass@ep-xyz.region.neon.tech/school_ops?sslmode=require" npm run migrate
+   ```
+
+### 2. Deploying Backend to Vercel
+The backend is structured for seamless Vercel Serverless Function deployment:
+* **`vercel.json`**: Configures build command (`npm run build`) and rewrites all routes (`/(.*)`) to `/api/index.js`.
+* **`api/index.js`**: Exports the compiled Express app (`require('../dist/app.js')`).
+* **Environment Variables on Vercel:**
+  * `NODE_ENV=production`
+  * `DATABASE_URL`: Your Neon pooled connection string.
+  * `JWT_SECRET`: Random 32+ character secret string.
+  * `CORS_ORIGIN`: Your production frontend URL (e.g. `https://schoolops.vercel.app`).
 
 ---
 

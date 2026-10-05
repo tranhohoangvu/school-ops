@@ -1,7 +1,7 @@
 # SchoolOps — Technical Documentation Specification
 
 > **System:** SchoolOps (Nguyen Tat Thanh Secondary School — Academic Year 2026–2027)  
-> **Architecture:** Next.js 16 App Router · Node.js + Express + TypeScript API · Native PostgreSQL · Per-Class RBAC · Render Ready  
+> **Architecture:** Next.js 16 App Router · Node.js + Express + TypeScript API · Native PostgreSQL · Per-Class RBAC · Vercel & Neon Ready  
 > **Source of Truth:** Active implementation in codebase (`frontend/src/`, `backend/`, `frontend/tests/`)
 
 ---
@@ -28,7 +28,7 @@ docs/
 │   └── business-rules.md                    # Auditable catalog of business rules (BR-001 to BR-019)
 │
 ├── data/
-│   ├── database-design.md                   # Relational PostgreSQL Database Schema (Render Hosted)
+│   ├── database-design.md                   # Relational PostgreSQL Database Schema (Neon Hosted)
 │   └── er-diagram.md                        # Complete Mermaid Entity-Relationship Diagram (12 tables)
 │
 ├── api/
@@ -58,7 +58,7 @@ docs/
 │   ├── DESIGN.md                            # Visual design system, component states, and layout spec
 │   ├── SKILL.md                             # Design conformance checklist & developer skill cheatsheet
 │   ├── technical-design.md                  # Technical decisions, OKLCH tokens, offline-first rationale
-│   └── implementation-notes.md              # Migration architecture, technical notes, and Render deployment
+│   └── implementation-notes.md              # Migration architecture, technical notes, and Vercel / Neon deployment
 │
 └── traceability/
     └── feature-to-code.md                   # Full traceability matrix from UI to Service to DB and Tests
@@ -109,7 +109,7 @@ docs/
 * [Visual Design System Spec](design/DESIGN.md): Visual design tokens, 7-state button/form contracts, and layout specifications.
 * [Design Skill & Conformance Guide](design/SKILL.md): Token quick reference, component inventory, and audit conformance checklist.
 * [Technical Design & Rationale](design/technical-design.md): Inferred design decisions, Fisher-Yates shuffle, OKLCH tokens, and A4 print styling.
-* [Implementation Notes & Roadmap](design/implementation-notes.md): Migration architecture, technical notes, and Render deployment specifications.
+* [Implementation Notes & Roadmap](design/implementation-notes.md): Migration architecture, technical notes, and Vercel & Neon deployment specifications.
 * [Feature-to-Code Traceability](traceability/feature-to-code.md): End-to-end matrix mapping requirements to UI pages, services, store keys, and Vitest test suites.
 
 ---

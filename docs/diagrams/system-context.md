@@ -25,8 +25,8 @@ graph TD
         ExcelFiles["Spreadsheet Files (.xlsx, .csv)<br/>(Bulk Roster Import & 4-Sheet School Export)"]
         PrintEngine["Browser Print Engine<br/>(CSS @media print Landscape A4)"]
         Messaging["External Parent Communication<br/>(Direct Tel, SMS, Zalo Chat Links)"]
-        BackendAPI["Node.js + Express REST API<br/>(Render Web Service)"]
-        PostgresDB["PostgreSQL Database<br/>(Render PostgreSQL)"]
+        BackendAPI["Node.js + Express REST API<br/>(Vercel Serverless Function)"]
+        PostgresDB["PostgreSQL Database<br/>(Neon Serverless Postgres)"]
     end
 
     Admin -->|"Manages faculty, classes, timetable, reports"| AppShell
@@ -62,5 +62,5 @@ graph TD
 | **Print Engine (`@media print`)** | Egest | Renders borderless, landscape A4 pages for classroom seating charts and weekly timetables. | `frontend/src/app/globals.css` |
 | **Parent Telephony / Zalo** | Egest URI | Launches `tel:`, `sms:`, and `https://zalo.me/` protocol handlers for 1-touch parent communication. | `frontend/src/app/(dashboard)/students/[id]/page.tsx` |
 | **Express REST API Client** | Network | Centralized REST client calling backend endpoints via Next.js proxy or direct base URL. | `frontend/src/lib/api-client.ts`, `backend/src/*` |
-| **Render PostgreSQL** | Database | Relational database hosting 12 normalized tables with triggers, indexes, and constraints. | `backend/src/config/database.ts` |
+| **Neon PostgreSQL** | Database | Cloud-native relational database hosting 12 normalized tables with triggers, indexes, and constraints. | `backend/src/config/database.ts` |
 

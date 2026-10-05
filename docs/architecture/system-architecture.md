@@ -8,7 +8,7 @@ The system follows a modern decoupled full-stack architecture:
 - **Frontend**: **Next.js 16 (App Router)** and **React 19**, structured with a centralized REST API client (`apiClient`) and React Context state.
 - **Backend**: Dedicated **Node.js + Express + TypeScript** service enforcing authentication (bcrypt + JWT / HTTP-only cookies), domain-level Role-Based Access Control (RBAC), Zod request validation, and database transactions.
 - **Database**: Relational **PostgreSQL** database managed via versioned SQL migrations and parameterized queries.
-- **Deployment**: **Render Web Service** (Express REST API) and **Render PostgreSQL**.
+- **Deployment**: **Vercel** (Frontend Next.js App Router & Backend Serverless Function) and **Neon Serverless PostgreSQL**.
 
 ```mermaid
 graph TD
@@ -18,7 +18,7 @@ graph TD
         ApiClient["REST API Client: frontend/src/lib/api-client.ts"]
     end
 
-    subgraph BackendAPI ["Express + Node.js + TypeScript Backend (Render Web Service)"]
+    subgraph BackendAPI ["Express + Node.js + TypeScript Backend (Vercel Serverless Function)"]
         AuthMiddleware["Auth & RBAC Middleware (requireRole, requireClassAccess)"]
         Validators["Input Validation: Zod Schemas"]
         Controllers["Controllers: Auth, Classes, Students, Timetable, Attendance..."]
@@ -26,7 +26,7 @@ graph TD
         Repositories["Repository Layer: Parameterized SQL Queries"]
     end
 
-    subgraph DatabaseTier ["PostgreSQL Database (Render PostgreSQL)"]
+    subgraph DatabaseTier ["PostgreSQL Database (Neon Serverless PostgreSQL)"]
         Postgres[("PostgreSQL 16 Database<br/>12 Tables, Constraints, Triggers, Indexes")]
     end
 
@@ -89,9 +89,9 @@ graph TD
                                     ▼
 ┌────────────────────────────────────────────────────────────────────────┐
 │                      6. PostgreSQL Database Tier                       │
-│   - Managed PostgreSQL 16 on Render                                    │
+│   - Managed PostgreSQL 16 on Neon Serverless Postgres                  │
 │   - 12 Relational Tables with constraints, triggers, and indexes       │
-│   - Migration scripts (backend/migrations/ 001 -> 006)                 │
+│   - Migration scripts (backend/migrations/ 001 -> 007)                 │
 └────────────────────────────────────────────────────────────────────────┘
 ```
 
